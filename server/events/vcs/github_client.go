@@ -23,6 +23,7 @@ import (
 	"github.com/google/go-github/github"
 	"github.com/pkg/errors"
 	"github.com/runatlantis/atlantis/server/events/models"
+	"github.com/runatlantis/atlantis/server/logging"
 )
 
 // maxCommentBodySize is derived from the error message when you go over
@@ -110,6 +111,8 @@ func (g *GithubClient) PullIsMergeable(repo models.Repo, pullNum int) (bool, err
 
 	// As far as I can tell possible values for this are 'clean' and 'blocked'
 	// but can't find an authoritative source for all values.
+	logger := logging.NewSimpleLogger("server", nil, false, logging.ToLogLevel("debug"))
+	logger.Debug("PR %s/%s/%d MergeableState = %s", repo.Owner, repo.Name, pullNum, *pull.MergeableState)
 	if *pull.MergeableState == "clean" {
 		return true, nil
 	} else {
