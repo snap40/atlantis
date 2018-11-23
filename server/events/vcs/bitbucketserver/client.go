@@ -158,6 +158,12 @@ func (b *Client) PullIsApproved(repo models.Repo, pull models.PullRequest) (bool
 	return false, nil
 }
 
+// PullIsMergeable returns true
+// TODO: Look at BitbucketServer equivalent to GitHubs mergeable_state field
+func (g *Client) PullIsMergeable(repo models.Repo, pullNum int) (bool, error) {
+	return true, nil
+}
+
 // UpdateStatus updates the status of a commit.
 func (b *Client) UpdateStatus(repo models.Repo, pull models.PullRequest, status models.CommitStatus, description string) error {
 	bbState := "FAILED"

@@ -78,6 +78,12 @@ func (g *GitlabClient) PullIsApproved(repo models.Repo, pull models.PullRequest)
 	return true, nil
 }
 
+// PullIsMergeable returns true
+// TODO: Look at Gitlab equivalent to GitHubs mergeable_state field
+func (g *GitlabClient) PullIsMergeable(repo models.Repo, pullNum int) (bool, error) {
+	return true, nil
+}
+
 // UpdateStatus updates the build status of a commit.
 func (g *GitlabClient) UpdateStatus(repo models.Repo, pull models.PullRequest, state models.CommitStatus, description string) error {
 	const statusContext = "Atlantis"
