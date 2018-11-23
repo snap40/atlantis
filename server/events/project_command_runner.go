@@ -217,7 +217,7 @@ func (p *DefaultProjectCommandRunner) doApply(ctx models.ProjectCommandContext) 
 	for _, req := range applyRequirements {
 		switch req {
 		case raw.ApprovedApplyRequirement:
-			mergable, err := p.PullApprovedChecker.PullIsMergable(ctx.BaseRepo, ctx.Pull.Num)
+			mergable, err := p.PullApprovedChecker.PullIsMergeable(ctx.BaseRepo, ctx.Pull.Num)
 			if err != nil {
 				return "", "", errors.Wrap(err, "checking if pull request was mergable")
 			}

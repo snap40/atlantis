@@ -101,8 +101,8 @@ func (g *GithubClient) CreateComment(repo models.Repo, pullNum int, comment stri
 	return nil
 }
 
-// PullIsMergable returns true if the pull request is in a mergable state
-func (g *GithubClient) PullIsMergable(repo models.Repo, pullNum int) (bool, error) {
+// PullIsMergeable returns true if the pull request is in a mergable state
+func (g *GithubClient) PullIsMergeable(repo models.Repo, pullNum int) (bool, error) {
 	pull, _, err := g.client.PullRequests.Get(g.ctx, repo.Owner, repo.Name, pullNum)
 	if err != nil {
 		return false, errors.Wrap(err, "getting pull request")

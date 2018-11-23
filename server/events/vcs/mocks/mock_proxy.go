@@ -62,9 +62,9 @@ func (mock *MockClientProxy) PullIsApproved(repo models.Repo, pull models.PullRe
 	return ret0, ret1
 }
 
-func (mock *MockClientProxy) PullIsMergable(repo models.Repo, pullNum int) (bool, error) {
+func (mock *MockClientProxy) PullIsMergeable(repo models.Repo, pullNum int) (bool, error) {
 	params := []pegomock.Param{repo, pullNum}
-	result := pegomock.GetGenericMockFrom(mock).Invoke("PullIsMergable", params, []reflect.Type{reflect.TypeOf((*error)(nil)).Elem()})
+	result := pegomock.GetGenericMockFrom(mock).Invoke("PullIsMergeable", params, []reflect.Type{reflect.TypeOf((*error)(nil)).Elem()})
 	var ret0 error
 	if len(result) != 0 {
 		if result[0] != nil {

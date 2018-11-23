@@ -25,7 +25,7 @@ type ClientProxy interface {
 	GetModifiedFiles(repo models.Repo, pull models.PullRequest) ([]string, error)
 	CreateComment(repo models.Repo, pullNum int, comment string) error
 	PullIsApproved(repo models.Repo, pull models.PullRequest) (bool, error)
-	PullIsMergable(repo models.Repo, pullNum int) (bool, error)
+	PullIsMergeable(repo models.Repo, pullNum int) (bool, error)
 	UpdateStatus(repo models.Repo, pull models.PullRequest, state models.CommitStatus, description string) error
 }
 
@@ -72,8 +72,8 @@ func (d *DefaultClientProxy) PullIsApproved(repo models.Repo, pull models.PullRe
 	return d.clients[repo.VCSHost.Type].PullIsApproved(repo, pull)
 }
 
-func (d *DefaultClientProxy) PullIsMergable(repo models.Repo, pullNum int) (bool, error) {
-	return d.clients[repo.VCSHost.Type].PullIsMergable(repo, pullNum)
+func (d *DefaultClientProxy) PullIsMergeable(repo models.Repo, pullNum int) (bool, error) {
+	return d.clients[repo.VCSHost.Type].PullIsMergeable(repo, pullNum)
 }
 
 func (d *DefaultClientProxy) UpdateStatus(repo models.Repo, pull models.PullRequest, state models.CommitStatus, description string) error {

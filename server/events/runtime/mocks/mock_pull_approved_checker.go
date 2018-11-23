@@ -34,9 +34,9 @@ func (mock *MockPullApprovedChecker) PullIsApproved(baseRepo models.Repo, pull m
 	return ret0, ret1
 }
 
-func (mock *MockPullApprovedChecker) PullIsMergable(baseRepo models.Repo, pullNum int) (bool, error) {
+func (mock *MockPullApprovedChecker) PullIsMergeable(baseRepo models.Repo, pullNum int) (bool, error) {
 	params := []pegomock.Param{baseRepo, pullNum}
-	result := pegomock.GetGenericMockFrom(mock).Invoke("PullIsMergable", params, []reflect.Type{reflect.TypeOf((*bool)(nil)).Elem(), reflect.TypeOf((*error)(nil)).Elem()})
+	result := pegomock.GetGenericMockFrom(mock).Invoke("PullIsMergeable", params, []reflect.Type{reflect.TypeOf((*bool)(nil)).Elem(), reflect.TypeOf((*error)(nil)).Elem()})
 	var ret0 bool
 	var ret1 error
 	if len(result) != 0 {
