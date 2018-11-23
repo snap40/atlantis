@@ -101,6 +101,22 @@ func (g *GithubClient) CreateComment(repo models.Repo, pullNum int, comment stri
 	return nil
 }
 
+// PullIsMergable returns true if the pull request is in a mergable state
+func (g *GithubClient) PullIsMergable(repo models.Repo, pullNum int) (bool, error) {
+	pull, _, err := g.client.PullRequests.Get(g.ctx, repo.Owner, repo.Name, pullNum)
+	if err != nil {
+		return false, errors.Wrap(err, "getting pull request")
+	}
+
+	// As far as I can tell possible values for this are 'clean' and 'blocked'
+	// but can't find an authoritative source for all values.
+	if *pull.MergeableState == "clean" {
+		return true, nil
+	} else {
+		return false, nil
+	}
+}
+
 // PullIsApproved returns true if the pull request was approved.
 func (g *GithubClient) PullIsApproved(repo models.Repo, pull models.PullRequest) (bool, error) {
 	reviews, _, err := g.client.PullRequests.ListReviews(g.ctx, repo.Owner, repo.Name, pull.Num, nil)

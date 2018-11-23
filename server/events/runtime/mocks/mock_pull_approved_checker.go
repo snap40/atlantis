@@ -34,6 +34,22 @@ func (mock *MockPullApprovedChecker) PullIsApproved(baseRepo models.Repo, pull m
 	return ret0, ret1
 }
 
+func (mock *MockPullApprovedChecker) PullIsMergable(baseRepo models.Repo, pullNum int) (bool, error) {
+	params := []pegomock.Param{baseRepo, pullNum}
+	result := pegomock.GetGenericMockFrom(mock).Invoke("PullIsMergable", params, []reflect.Type{reflect.TypeOf((*bool)(nil)).Elem(), reflect.TypeOf((*error)(nil)).Elem()})
+	var ret0 bool
+	var ret1 error
+	if len(result) != 0 {
+		if result[0] != nil {
+			ret0 = result[0].(bool)
+		}
+		if result[1] != nil {
+			ret1 = result[1].(error)
+		}
+	}
+	return ret0, ret1
+}
+
 func (mock *MockPullApprovedChecker) VerifyWasCalledOnce() *VerifierPullApprovedChecker {
 	return &VerifierPullApprovedChecker{mock, pegomock.Times(1), nil}
 }
