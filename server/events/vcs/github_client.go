@@ -113,7 +113,7 @@ func (g *GithubClient) PullIsMergeable(repo models.Repo, pullNum int) (bool, err
 	// but can't find an authoritative source for all values.
 	logger := logging.NewSimpleLogger("server", nil, false, logging.ToLogLevel("debug"))
 	logger.Debug("PR %s/%s/%d MergeableState = %s", repo.Owner, repo.Name, pullNum, *pull.MergeableState)
-	if *pull.MergeableState == "clean" {
+	if *pull.MergeableState == "clean" || *pull.MergeableState == "unstable" {
 		return true, nil
 	} else {
 		return false, nil
